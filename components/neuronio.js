@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffd700',
         borderWidth: 2,
         borderRadius: 50,
-        height: 100,
-        width: 100,
+        height: 70,
+        width: 70,
         alignItems: 'center',
-        paddingTop: 37,
+        paddingTop: 23,
         margin: 10
     },
     camada: {

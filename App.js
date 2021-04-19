@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
+  Dimensions,
   View,
   StatusBar,
   TouchableOpacity,
@@ -18,7 +19,21 @@ import {
 import Header from './components/header';
 import Neuronio from './components/neuronio';
 
+var width = Dimensions.get('window').width; 
+var height = Dimensions.get('window').height; 
+
 const App = () => {
+
+  const [input, setinput] = useState([
+    {
+      value: [
+        { neuroKey: 1, neuroValue: 0.4 },
+        { neuroKey: 2, neuroValue: 0.5 },
+        { neuroKey: 3, neuroValue: 0.34 },
+        { neuroKey: 4, neuroValue: 0.77 }], camadaKey: 1
+    }
+  ]);
+
 
   const [neuronios, setNeuronios] = useState([
     {
@@ -26,7 +41,8 @@ const App = () => {
         { neuroKey: 1, neuroValue: 0.4 },
         { neuroKey: 2, neuroValue: 0.5 },
         { neuroKey: 3, neuroValue: 0.34 },
-        { neuroKey: 4, neuroValue: 0.77 }], camadaKey: 1
+        { neuroKey: 4, neuroValue: 0.77 },
+        { neuroKey: 5, neuroValue: 0.27 }], camadaKey: 1
     },
     {
       value: [
@@ -56,23 +72,45 @@ const App = () => {
     <>
       <StatusBar barStyle='light-content' />
 
+
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
 
         <Header />
 
+
+
+
+        <FlatList
+          horizontal={false}
+          data={input}
+          keyExtractor={(item, index) => item.camadaKey.toString()}
+          renderItem={({ item }) => (
+            <Neuronio neuronios={item} />
+          )}
+        />
+
+        <FlatList
+          style={styles.list}
+          horizontal={false}
+          data={neuronios}
+          keyExtractor={(item, index) => item.camadaKey.toString()}
+          renderItem={({ item }) => (
+            <Neuronio neuronios={item} />
+          )}
+        />
+
+        <FlatList
+          horizontal={false}
+          data={input}
+          keyExtractor={(item, index) => item.camadaKey.toString()}
+          renderItem={({ item }) => (
+            <Neuronio neuronios={item} />
+          )}
+        />
       </ScrollView>
 
-      <FlatList
-        style={styles.list}
-        horizontal={false}
-        data={neuronios}
-        keyExtractor={(item, index) => item.camadaKey.toString()}
-        renderItem={({ item }) => (
-          <Neuronio neuronios={item} />
-        )}
-      />
 
     </>
   );
@@ -82,7 +120,6 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-
   neuronio: {
 
     borderColor: '#2f4f4f',
@@ -96,7 +133,8 @@ const styles = StyleSheet.create({
   },
 
   list: {
-
+    width: width,
+    height: 300
   }
 
 });
