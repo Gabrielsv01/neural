@@ -7,20 +7,16 @@ import {
   Dimensions,
   View,
   StatusBar,
-  TouchableOpacity,
-  Text,
-  FlatList
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
 
 import Header from './components/header';
 import Neuronio from './components/neuronio';
+import Input from './components/input';
+import Output from './components/output';
 
-var width = Dimensions.get('window').width; 
-var height = Dimensions.get('window').height; 
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 const App = () => {
 
@@ -28,12 +24,11 @@ const App = () => {
     {
       value: [
         { neuroKey: 1, neuroValue: 0.4 },
-        { neuroKey: 2, neuroValue: 0.5 },
+        { neuroKey: 2, neuroValue: 0.599 },
         { neuroKey: 3, neuroValue: 0.34 },
         { neuroKey: 4, neuroValue: 0.77 }], camadaKey: 1
     }
   ]);
-
 
   const [neuronios, setNeuronios] = useState([
     {
@@ -42,7 +37,8 @@ const App = () => {
         { neuroKey: 2, neuroValue: 0.5 },
         { neuroKey: 3, neuroValue: 0.34 },
         { neuroKey: 4, neuroValue: 0.77 },
-        { neuroKey: 5, neuroValue: 0.27 }], camadaKey: 1
+        { neuroKey: 5, neuroValue: 0.77 },
+        { neuroKey: 6, neuroValue: 0.27 }], camadaKey: 1
     },
     {
       value: [
@@ -68,70 +64,46 @@ const App = () => {
 
   ]);
 
+  const [output, setOutput] = useState([
+    {
+      value: [
+        { neuroKey: 1, neuroValue: 0.0 },
+        { neuroKey: 2, neuroValue: 0.0 },
+        { neuroKey: 3, neuroValue: 0.0 },
+        { neuroKey: 4, neuroValue: 0.0 }], camadaKey: 1
+    }
+  ]);
+
   return (
     <>
       <StatusBar barStyle='light-content' />
 
-
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}>
-
+      <ScrollView style={styles.scrollView}>
         <Header />
 
+        <SafeAreaView>
+          {input.map((inputItem, index) => <Input neuronios={inputItem} key={index} />)}
+        </SafeAreaView>
+
+        <SafeAreaView>
+          {neuronios.map((item, index) => <Neuronio neuronios={item} key={index} />)}
+        </SafeAreaView>
+
+        <SafeAreaView>
+          {output.map((outputItem, index) => <Output neuronios={outputItem} key={index} />)}
+        </SafeAreaView>
 
 
-
-        <FlatList
-          horizontal={false}
-          data={input}
-          keyExtractor={(item, index) => item.camadaKey.toString()}
-          renderItem={({ item }) => (
-            <Neuronio neuronios={item} />
-          )}
-        />
-
-        <FlatList
-          style={styles.list}
-          horizontal={false}
-          data={neuronios}
-          keyExtractor={(item, index) => item.camadaKey.toString()}
-          renderItem={({ item }) => (
-            <Neuronio neuronios={item} />
-          )}
-        />
-
-        <FlatList
-          horizontal={false}
-          data={input}
-          keyExtractor={(item, index) => item.camadaKey.toString()}
-          renderItem={({ item }) => (
-            <Neuronio neuronios={item} />
-          )}
-        />
       </ScrollView>
-
-
     </>
   );
 };
 
 const styles = StyleSheet.create({
+
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: '#012340',
   },
-  neuronio: {
-
-    borderColor: '#2f4f4f',
-    backgroundColor: '#ffd700',
-    borderWidth: 2,
-    borderRadius: 50,
-    height: 100,
-    width: 100,
-    alignItems: 'center',
-    paddingTop: 37
-  },
-
   list: {
     width: width,
     height: 300

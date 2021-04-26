@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     TouchableOpacity,
@@ -10,13 +9,13 @@ import {
 } from 'react-native';
 
 
-const Neuronio = ({ neuronios }) => {
+const Output = ({ neuronios }) => {
 
     return (
         <View>
 
             <View style={styles.camada}>
-                <Text style={styles.title}>Camada {neuronios.camadaKey}</Text>
+                <Text style={styles.title}>Camada de Saida</Text>
             </View>
 
             <View>
@@ -26,7 +25,7 @@ const Neuronio = ({ neuronios }) => {
                     keyExtractor={(item, index) => item.neuroKey.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity>
-                            <View style={styles.neuronio}>
+                            <View style={styles.input}>
                                 <Text style={styles.value}>{item.neuroValue}</Text>
                             </View>
                         </TouchableOpacity>
@@ -41,9 +40,9 @@ const Neuronio = ({ neuronios }) => {
 
 const styles = StyleSheet.create({
 
-    neuronio: {
-        borderColor: '#0A3873',
-        backgroundColor: '#0A3873',
+    input: {
+        borderColor: '#8C325C',
+        backgroundColor: '#8C325C',
         borderWidth: 2,
         borderRadius: 50,
         height: 60,
@@ -70,4 +69,4 @@ const styles = StyleSheet.create({
     },
 
 });
-export default Neuronio;
+export default Output;

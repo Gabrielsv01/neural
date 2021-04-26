@@ -9,19 +9,22 @@ import {
 const Header = () => {
     return (
         <View style={styles.header}>
-            <Text>teste</Text>
+            <Text style={styles.title}>Teste</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#ff7f50',
+        backgroundColor: '#022873',
         height: 60,
         alignItems: 'center',
         flex: 1,
         paddingTop: 17
         
+    },
+    title:{
+        color: '#FFFFFF',
     },
     
 });
